@@ -12,7 +12,7 @@ cat > pe.conf <<-EOF
   "puppet_enterprise::puppet_master_host": "%{::trusted.certname}"
   "puppet_enterprise::use_application_services": true
   "puppet_enterprise::profile::master::check_for_updates": false
-  "puppet_enterprise::profile::master::r10k_remote": "git@github.com:ralfbosz/puppet-control.git"
+  "puppet_enterprise::profile::master::r10k_remote": "git@github.com:ralfbosz/control-repo.git"
   "puppet_enterprise::profile::master::r10k_private_key": "/vagrant/keys/id-control_repo.rsa"
 }
 EOF
