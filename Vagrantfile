@@ -12,44 +12,42 @@ Vagrant.configure("2") do |config|
     end
   end 
 
-  config.vm.define "windows.vm" do |windows|
-    windows.vm.box = "ferventcoder/win2012r2-x64-nocm"
-    windows.vm.communicator = "winrm"
-    windows.vm.hostname = "windows"
-    windows.vm.provision "shell", path: "scripts/windows_agent.ps1"
-    windows.vm.network "private_network", ip: "192.168.50.5"
-    windows.vm.provider "virtualbox" do |v|
-      v.memory = 2048
+  config.vm.define "webserver.vm" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = "webserver.vm"
+    centos.vm.network "private_network", ip: "192.168.50.10"
+    centos.vm.provision "shell", path: "scripts/webserver.sh"
+    centos.vm.provider "virtualbox" do |v|
+      v.memory = 1024
     end
   end
-
-  config.vm.define "centos.vm" do |centos|
+  
+  config.vm.define "jira.vm" do |centos|
     centos.vm.box = "centos/7"
-    centos.vm.hostname = "centos.vm"
-    centos.vm.network "private_network", ip: "192.168.50.6"
-    centos.vm.provision "shell", path: "scripts/centos_agent.sh"
+    centos.vm.hostname = "jira.vm"
+    centos.vm.network "private_network", ip: "192.168.50.20"
+    centos.vm.provision "shell", path: "scripts/jira.sh"
     centos.vm.provider "virtualbox" do |v|
       v.memory = 2048
     end
   end
-  
-  config.vm.define "oraclelinux.vm" do |oraclelinux|
-    oraclelinux.vm.box = "elastic/oraclelinux-7-x86_64"
-    oraclelinux.vm.hostname = "oraclelinux.vm"
-    oraclelinux.vm.network "private_network", ip: "192.168.50.7"
-    oraclelinux.vm.provision "shell", path: "scripts/oraclelinux_agent.sh"
-    oraclelinux.vm.provider "virtualbox" do |v|
+
+  config.vm.define "splunk.vm" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = "splunk.vm"
+    centos.vm.network "private_network", ip: "192.168.50.21"
+    centos.vm.provision "shell", path: "scripts/splunk.sh"
+    centos.vm.provider "virtualbox" do |v|
       v.memory = 2048
     end
   end
 
-  config.vm.define "ubuntu.vm" do |ubuntu|
-    ubuntu.vm.box = "elastic/ubuntu-16.04-x86_64"
-    ubuntu.vm.hostname = "ubuntu.vm"
-    ubuntu.vbguest.auto_update = false
-    ubuntu.vm.network "private_network", ip: "192.168.50.8"
-    ubuntu.vm.provision "shell", path: "scripts/ubuntu_agent.sh"
-    ubuntu.vm.provider "virtualbox" do |v|
+  config.vm.define "database.vm" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = "database.vm"
+    centos.vm.network "private_network", ip: "192.168.50.30"
+    centos.vm.provision "shell", path: "scripts/database.sh"
+    centos.vm.provider "virtualbox" do |v|
       v.memory = 2048
     end
   end
